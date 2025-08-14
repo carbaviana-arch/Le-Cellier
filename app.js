@@ -6,13 +6,10 @@ const totalEl = document.getElementById('total-compra');
 const presEl = document.getElementById('presupuesto-restante');
 const modal = document.getElementById('modal-resumen');
 const tabla = document.getElementById('tabla-resumen');
+const btnTema = document.getElementById('btn-tema');
 
-function guardarLista() {
-  localStorage.setItem('lista', JSON.stringify(lista));
-}
-function guardarPres() {
-  localStorage.setItem('presupuesto', presupuesto);
-}
+function guardarLista() { localStorage.setItem('lista', JSON.stringify(lista)); }
+function guardarPres() { localStorage.setItem('presupuesto', presupuesto); }
 
 function renderLista(){
   listaEl.innerHTML = '';
@@ -20,16 +17,17 @@ function renderLista(){
   lista.forEach((item, i) => {
     const li = document.createElement('li');
     li.className = item.comprado ? 'comprado' : '';
+    
     const nombre = document.createElement('span');
-    nombre.textContent = `${item.nombre} (${item.categoria}) - €${item.precio.toFixed(2)}`;
+    const subtotal = (item.precio * item.cantidad).toFixed(2);
+    nombre.textContent = `${item.nombre} (${item.categoria}) - €${item.precio.toFixed(2)} × ${item.cantidad} = €${subtotal}`;
     nombre.addEventListener('click', ()=> toggleComprado(i));
 
     const btnMenos = document.createElement('button');
     btnMenos.textContent = '−';
     btnMenos.onclick = (e)=>{ e.stopPropagation(); cambiarCantidad(i, -1); };
 
-    const cantidad = document.createElement('span');
-    cantidad.textContent = item.cantidad;
+    const cantidad = document.createElement('span'); cantidad.textContent = item.cantidad;
 
     const btnMas = document.createElement('button');
     btnMas.textContent = '+';
@@ -46,7 +44,7 @@ function renderLista(){
 }
 
 function actualizarTotales(){
-  const total = lista.reduce((acc, it) => acc + it.precio * it.cantidad, 0);
+  const total = lista.reduce((acc, it) => acc + it.precio*it.cantidad, 0);
   totalEl.textContent = `Total: €${total.toFixed(2)}`;
   if(presupuesto > 0){
     const rest = presupuesto - total;
@@ -64,8 +62,8 @@ function toggleComprado(i){
   renderLista();
 }
 
-function cambiarCantidad(i, d){
-  lista[i].cantidad = Math.max(1, (lista[i].cantidad||1) + d);
+function cambiarCantidad(i,d){
+  lista[i].cantidad = Math.max(1,(lista[i].cantidad||1)+d);
   guardarLista();
   renderLista();
 }
@@ -85,7 +83,7 @@ document.getElementById('form-producto').addEventListener('submit', (e)=>{
   const cantidad = parseInt(document.getElementById('cantidad').value);
   const categoria = document.getElementById('categoria').value;
   if(!nombre || isNaN(precio) || isNaN(cantidad)) return;
-  lista.push({ nombre, precio, cantidad, categoria, comprado:false });
+  lista.push({nombre, precio, cantidad, categoria, comprado:false});
   guardarLista();
   renderLista();
   e.target.reset();
@@ -100,7 +98,7 @@ document.getElementById('btn-resumen').addEventListener('click', ()=>{
     resumen[it.categoria] = (resumen[it.categoria]||0) + it.precio*it.cantidad;
     total += it.precio*it.cantidad;
   });
-  tabla.innerHTML = Object.keys(resumen).map(cat => 
+  tabla.innerHTML = Object.keys(resumen).map(cat =>
     `<tr><td>${cat}</td><td style="text-align:right">€${resumen[cat].toFixed(2)}</td></tr>`
   ).join('') + `<tr><td><strong>Total</strong></td><td style="text-align:right"><strong>€${total.toFixed(2)}</strong></td></tr>`;
   modal.style.display = 'flex';
@@ -116,6 +114,12 @@ document.getElementById('btn-presupuesto').addEventListener('click', ()=>{
     guardarPres();
     actualizarTotales();
   }
+});
+
+// Botón tema oscuro
+btnTema.addEventListener('click', ()=>{
+  document.body.classList.toggle('dark-mode');
+  btnTema.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
 });
 
 renderLista();
