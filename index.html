@@ -4,86 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Le Cellier - Lista de Compras</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      max-width: 600px;
-      margin: auto;
-      padding: 20px;
-      background: #f4f4f4;
-    }
-    h1 {
-      text-align: center;
-    }
-    form {
-      display: grid;
-      gap: 10px;
-      margin-bottom: 20px;
-    }
-    input, select, button {
-      padding: 8px;
-      font-size: 14px;
-    }
-    ul {
-      list-style: none;
-      padding: 0;
-    }
-    li {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: white;
-      margin-bottom: 8px;
-      padding: 8px;
-      border-radius: 5px;
-    }
-    li.comprado {
-      opacity: 0.5;
-    }
-    li button {
-      margin-left: 5px;
-    }
-    #total-compra, #presupuesto-restante {
-      font-weight: bold;
-      display: block;
-      margin-top: 10px;
-    }
-    #presupuesto-restante.negative {
-      color: red;
-    }
-    /* Modal */
-    #modal-resumen {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.5);
-      justify-content: center;
-      align-items: center;
-    }
-    #modal-resumen .contenido {
-      background: white;
-      padding: 20px;
-      border-radius: 10px;
-      min-width: 300px;
-    }
-    #modal-resumen table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-    #modal-resumen td {
-      padding: 5px;
-      border-bottom: 1px solid #ddd;
-    }
-    #cerrar-modal {
-      margin-top: 10px;
-      display: block;
-      text-align: center;
-      background: #ccc;
-      padding: 5px;
-      cursor: pointer;
-      border-radius: 5px;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <h1>Le Cellier - Lista de Compras</h1>
@@ -123,9 +44,6 @@
     </div>
   </div>
 
-  <!-- Tu script -->
-  <script>
-    // Aquí pega exactamente el código JS que me diste
-  </script>
+  <script src="app.js"></script>
 </body>
 </html>
