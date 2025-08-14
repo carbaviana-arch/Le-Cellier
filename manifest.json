@@ -1,10 +1,10 @@
 {
   "name": "Le Cellier",
-  "short_name": "LeCellier",
-  "start_url": "./index.html",
+  "short_name": "Cellier",
+  "start_url": "./",
   "display": "standalone",
-  "background_color": "#000000",
-  "theme_color": "#000000",
+  "background_color": "#f2f2f7",
+  "theme_color": "#0a84ff",
   "icons": [
     {
       "src": "icons/icon-192.png",
