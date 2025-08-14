@@ -7,9 +7,17 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Le Cellier - Lista de Compras</h1>
 
-  <form id="form-producto">
+  <!-- Barra superior -->
+  <div class="navbar">
+    <div class="navbar-inner">
+      <div class="title-large">Le Cellier</div>
+      <div class="subtitle">Lista de Compras</div>
+    </div>
+  </div>
+
+  <!-- Formulario -->
+  <form id="form-producto" class="grouped">
     <input type="text" id="nombre" placeholder="Producto" required>
     <input type="number" id="precio" placeholder="Precio (€)" step="0.01" required>
     <input type="number" id="cantidad" placeholder="Cantidad" min="1" value="1" required>
@@ -28,22 +36,30 @@
     <button type="submit">Agregar</button>
   </form>
 
+  <!-- Lista de productos -->
   <ul id="lista"></ul>
 
-  <div id="total-compra"></div>
-  <div id="presupuesto-restante"></div>
+  <!-- Estadísticas -->
+  <div class="stats">
+    <div id="total-compra" class="stat">Total: €0.00</div>
+    <div id="presupuesto-restante" class="stat">Presupuesto: —</div>
+  </div>
 
-  <button id="btn-presupuesto">Establecer presupuesto</button>
-  <button id="btn-resumen">Ver resumen por categoría</button>
+  <!-- Barra inferior -->
+  <div class="tabbar">
+    <button id="btn-presupuesto" class="tab-btn">Presupuesto</button>
+    <button id="btn-resumen" class="tab-btn">Resumen</button>
+  </div>
 
-  <!-- Modal -->
-  <div id="modal-resumen">
-    <div class="contenido">
+  <!-- Modal de resumen -->
+  <div id="modal-resumen" class="modal">
+    <div class="sheet">
       <table id="tabla-resumen"></table>
-      <div id="cerrar-modal">Cerrar</div>
+      <button id="cerrar-modal" class="close">Cerrar</button>
     </div>
   </div>
 
+  <!-- Script principal -->
   <script src="app.js"></script>
 </body>
 </html>
