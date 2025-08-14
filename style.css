@@ -7,14 +7,26 @@
   --danger: #ff3b30;
   --shadow: 0 4px 12px rgba(0,0,0,0.08);
   --radius: 12px;
+
+  --bg-dark: #121212;
+  --card-dark: #1e1e1e;
+  --text-dark: #e0e0e0;
+  --secondary-dark: #999999;
+  --tint-dark: #0a84ff;
+  --danger-dark: #ff6b6b;
 }
 
-* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-html, body { height: 100%; margin: 0; }
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial;
   background: var(--bg);
   color: var(--text);
+  margin: 0;
+  transition: all 0.3s ease;
+}
+
+body.dark-mode {
+  background: var(--bg-dark);
+  color: var(--text-dark);
 }
 
 /* Navbar */
@@ -24,18 +36,19 @@ body {
   backdrop-filter: blur(20px);
   background: rgba(255,255,255,0.8);
   border-bottom: 1px solid rgba(0,0,0,0.06);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  z-index: 10;
 }
 .navbar-inner {
-  padding: 12px;
+  display: flex;
+  flex-direction: column;
 }
-.title-large {
-  font-size: 24px;
-  font-weight: 700;
-}
-.subtitle {
-  font-size: 13px;
-  color: var(--secondary);
-}
+.title-large { font-size: 24px; font-weight: 700; }
+.subtitle { font-size: 13px; color: var(--secondary); }
+body.dark-mode .subtitle { color: var(--secondary-dark); }
 
 /* Formulario */
 .grouped {
@@ -48,12 +61,21 @@ body {
   margin: 12px;
   box-shadow: var(--shadow);
 }
+body.dark-mode .grouped { background: var(--card-dark); }
+
 .grouped input, .grouped select, .grouped button {
   height: 38px;
   padding: 0 10px;
   border: 1px solid rgba(0,0,0,0.1);
   border-radius: 8px;
   font-size: 14px;
+  transition: all 0.3s ease;
+}
+body.dark-mode .grouped input,
+body.dark-mode .grouped select {
+  background: #2a2a2a;
+  border: 1px solid #444;
+  color: var(--text-dark);
 }
 .grouped button {
   background: var(--tint);
@@ -62,16 +84,10 @@ body {
   font-weight: 600;
   cursor: pointer;
 }
-.grouped button:active {
-  filter: brightness(0.9);
-}
+.grouped button:active { filter: brightness(0.9); }
 
 /* Lista */
-#lista {
-  list-style: none;
-  padding: 12px;
-  margin: 0;
-}
+#lista { list-style: none; padding: 12px; margin: 0; }
 #lista li {
   background: var(--card);
   padding: 10px;
@@ -81,21 +97,18 @@ body {
   gap: 6px;
   margin-bottom: 8px;
   box-shadow: var(--shadow);
+  transition: all 0.3s ease;
 }
+body.dark-mode #lista li { background: var(--card-dark); color: var(--text-dark); }
+
 #lista li.comprado {
   opacity: 0.5;
   text-decoration: line-through;
 }
-#lista button {
-  background: #e9e9ee;
-  border: none;
-  padding: 4px 8px;
-  border-radius: 6px;
-  cursor: pointer;
-}
-#lista button:hover {
-  background: #ddd;
-}
+#lista button { background: #e9e9ee; border: none; padding: 4px 8px; border-radius: 6px; cursor: pointer; transition: all 0.2s; }
+#lista button:hover { background: #ddd; }
+body.dark-mode #lista button { background: #333; color: var(--text-dark); }
+body.dark-mode #lista button:hover { background: #444; }
 
 /* Stats */
 .stats {
@@ -111,10 +124,11 @@ body {
   text-align: center;
   font-weight: bold;
   box-shadow: var(--shadow);
+  transition: all 0.3s ease;
 }
-.negative {
-  color: var(--danger);
-}
+body.dark-mode .stat { background: var(--card-dark); color: var(--text-dark); }
+.negative { color: var(--danger); }
+body.dark-mode .negative { color: var(--danger-dark); }
 
 /* Tabbar */
 .tabbar {
@@ -126,13 +140,9 @@ body {
   border-top: 1px solid rgba(0,0,0,0.06);
   padding: 8px;
 }
-.tab-btn {
-  border: none;
-  background: transparent;
-  color: var(--tint);
-  font-weight: 600;
-  cursor: pointer;
-}
+body.dark-mode .tabbar { background: rgba(30,30,30,0.85); border-top: 1px solid #444; }
+
+.tab-btn { border: none; background: transparent; color: var(--tint); font-weight: 600; cursor: pointer; }
 
 /* Modal */
 .modal {
@@ -151,20 +161,8 @@ body {
   border-top-right-radius: var(--radius);
   padding: 16px;
 }
-.sheet table {
-  width: 100%;
-  border-collapse: collapse;
-}
-.sheet td {
-  padding: 6px 4px;
-}
-.close {
-  margin-top: 10px;
-  width: 100%;
-  padding: 10px;
-  background: #e9e9ee;
-  border: none;
-  border-radius: 8px;
-  font-weight: 600;
-  cursor: pointer;
-}
+.sheet table { width: 100%; border-collapse: collapse; }
+.sheet td { padding: 6px 4px; }
+.close { margin-top: 10px; width: 100%; padding: 10px; background: #e9e9ee; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; }
+body.dark-mode .sheet { background: var(--card-dark); color: var(--text-dark); }
+body.dark-mode .close { background: #333; color: var(--text-dark); }
